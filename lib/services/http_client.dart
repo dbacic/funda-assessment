@@ -14,4 +14,6 @@ class HttpClient {
     final url = Uri.parse('$baseServerUrl$endpoint');
     return client.get(url);
   }
+
+  // We would create also for other methods (post, delete, put) and also add additional parameters in the method like headers and body
 }

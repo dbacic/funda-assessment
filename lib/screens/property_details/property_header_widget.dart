@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funda_assessment/models/property_details.dart';
+import 'package:funda_assessment/widgets/circular_button.dart';
 
 import 'property_image_slider.dart';
 import 'property_video_slider.dart';
@@ -27,48 +28,32 @@ class _PropertyHeaderWidgetState extends State<PropertyHeaderWidget> {
         Positioned(
           top: 12,
           left: 12,
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-                color: Colors.white70,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.close,
-                  size: 24,
-                ),
-              ),
-            ),
+          child: CircularButton(
+            Icons.close,
+            _closeScreen,
           ),
         ),
-        Positioned(
-          top: 12,
-          right: 12,
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _isVideoListShown = !_isVideoListShown;
-              });
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-                color: Colors.white70,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  _isVideoListShown ? Icons.image : Icons.video_collection,
-                  size: 24,
-                ),
-              ),
-            ),
+        Visibility(
+          visible: widget.propertyDetails.videos.isNotEmpty,
+          child: Positioned(
+            top: 12,
+            right: 12,
+            child: CircularButton(
+                _isVideoListShown ? Icons.image : Icons.video_collection,
+                _toggleVideoImageList),
           ),
         ),
       ],
     );
+  }
+
+  void _toggleVideoImageList() {
+    setState(() {
+      _isVideoListShown = !_isVideoListShown;
+    });
+  }
+
+  void _closeScreen() {
+    Navigator.pop(context);
   }
 }

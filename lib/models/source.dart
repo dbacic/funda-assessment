@@ -12,7 +12,9 @@ class Source {
   factory Source.fromMap(Map<String, dynamic> map) {
     return Source(
       deliveryType: VideoDeliveryType.values.firstWhere(
-        (element) => element == map['DeliveryType'],
+        (element) => element.toString().toLowerCase().contains(
+              map['DeliveryType'].toString().toLowerCase(),
+            ),
         orElse: () => VideoDeliveryType.download,
       ),
       url: map['Url'],

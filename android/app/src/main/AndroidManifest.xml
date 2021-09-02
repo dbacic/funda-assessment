@@ -17,9 +17,10 @@
             <data android:mimeType="*/*" />
         </intent>
     </queries>
-    
+
     <application
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         android:label="funda_assessment">
         <activity
             android:name=".MainActivity"

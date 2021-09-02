@@ -1,9 +1,8 @@
 import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:funda_assessment/models/source.dart';
 
 class Video {
-  // final String imageUrl; //ImageUrl
-  // final String thumbnailUrl; //ThumbnailUrl
   final List<Source> sources; // Videos/Cdns
 
   Video({
@@ -18,10 +17,7 @@ class Video {
 
   factory Video.fromJson(String source) => Video.fromMap(json.decode(source));
 
-  Source? getStreamingSource() {
-    return sources.firstWhere(
-      (element) => element.deliveryType == VideoDeliveryType.streaming,
-      orElse: () => sources.first,
-    );
+  Source? getFirstSource() {
+    return sources.firstOrNull;
   }
 }

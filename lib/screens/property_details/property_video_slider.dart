@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funda_assessment/models/video.dart';
-import 'package:video_player/video_player.dart';
+import 'package:funda_assessment/widgets/video_player_widget.dart';
 
 class PropertyVideoSlider extends StatefulWidget {
   final List<Video> videos;
@@ -18,14 +18,10 @@ class _PropertyVideoSliderState extends State<PropertyVideoSlider> {
       child: ListView.builder(
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          final source = widget.videos[index].getStreamingSource();
+          final source = widget.videos[index];
 
-          if (source != null) {
-            final controller = VideoPlayerController.network(source.url)
-              ..initialize().then((value) {
-                setState(() {});
-              });
-            return VideoPlayer(controller);
+          if (source.getFirstSource() != null) {
+            return VideoPlayerWidget(source.getFirstSource()!.url);
           }
 
           return Container();
